@@ -50,9 +50,8 @@ def photo(update, context):
     button1 = InlineKeyboardButton(text='👍', callback_data="like_emoji")
     button2 = InlineKeyboardButton(text='👎', callback_data="dislike_emoji")
     keyboard = InlineKeyboardMarkup([[button1, button2]])
-
+    
     bot.sendPhoto(chat_id=chat_id, photo=photo, reply_markup=keyboard)
-
 
 updater = Updater(TOKEN)
 dp = updater.dispatcher
