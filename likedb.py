@@ -40,7 +40,10 @@ class LikeDB:
         Returns:
             None
         """
-        img_data = self.data[str(message_id)]
+        chat_id = str(chat_id)
+        message_id = str(message_id)
+
+        img_data = self.data[message_id]
         user = img_data.get(chat_id)
         if user == None:
             img_data[chat_id] = {
@@ -69,7 +72,10 @@ class LikeDB:
         Returns:
             None
         """
-        img_data = self.data[str(message_id)]
+        chat_id = str(chat_id)
+        message_id = str(message_id)
+
+        img_data = self.data[message_id]
         user = img_data.get(chat_id)
         if user == None:
             img_data[chat_id] = {
@@ -90,4 +96,37 @@ class LikeDB:
         
         self.save(self.data)
 
+    def get_likes(self, message_id):
+        """
+        Get likes of the image
+
+        Args:
+            message_id (int): message id
+        Returns:
+            int: likes
+        """
+        message_id = str(message_id)
+        img_data = self.data[message_id]
+        likes = 0
+        for user in img_data.keys():
+            likes += img_data[user]['like']
+
+        return likes
+    
+    def get_dislikes(self, message_id):
+        """
+        Get dislikes of the image
+
+        Args:
+            message_id (int): message id
+        Returns:
+            int: dislikes
+        """
+        message_id = str(message_id)
+        img_data = self.data[message_id]
+        dislikes = 0
+        for user in img_data.keys():
+            dislikes += img_data[user]['dislike']
+
+        return dislikes
 
