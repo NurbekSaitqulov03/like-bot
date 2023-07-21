@@ -28,7 +28,9 @@ class LikeDB:
         Returns:
             None
         """
-        self.data[message_id] = {}
+        if self.data.get(message_id) == None:
+            self.data[message_id] = {}
+
         self.save(self.data)
 
     def add_like(self, chat_id, message_id):
@@ -74,9 +76,9 @@ class LikeDB:
         """
         chat_id = str(chat_id)
         message_id = str(message_id)
-
         img_data = self.data[message_id]
         user = img_data.get(chat_id)
+
         if user == None:
             img_data[chat_id] = {
                 'like': 0,
